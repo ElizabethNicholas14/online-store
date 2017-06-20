@@ -7,8 +7,13 @@ class Product < ApplicationRecord
 #all this comes from the paperclip documentation
   has_attached_file :avatar, styles: {medium: '300x300', thumb:'100x100>'}, default_url: "missing_:style.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
-  validates :price, numericality:true
-  validates :quantity, numericality: {only_integer_true:true}
+
+  validates_numericality_of :price,
+            greater_than_or_equal_to: 0.01
+
+  validates_numericality_of :quantity,
+            greater_than_or_equal_to: 0
+
   validates :brand, :quantity, presence:true
 
 
