@@ -1,10 +1,17 @@
 class Product < ApplicationRecord
-  belongs_to :brand
+  belongs_to :brand, optional:true
   belongs_to :category
 
+  validates :name, presence: true
+  validates_uniqueness_of :name, scope: :brand_id
 #all this comes from the paperclip documentation
   has_attached_file :avatar, styles: {medium: '300x300', thumb:'100x100>'}, default_url: "missing_:style.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates :price, numericality:true
+  validates :quantity, numericality: {only_integer_true:true}
+  validates :brand, :quantity, presence:true
+
+
 end
 
 # == Schema Information

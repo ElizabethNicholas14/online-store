@@ -2,9 +2,10 @@
 
 <h1>Products</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
+      <th>Product Image</th>
       <th>Name</th>
       <th>Price</th>
       <th>Quantity</th>
@@ -18,12 +19,13 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
+        <td><%= image_tag (product.avatar.url(:thumb)) %></td>
         <td><%= product.name %></td>
-        <td><%= product.price %></td>
+        <td><%= number_to_currency(product.price) %></td>
         <td><%= product.quantity %></td>
         <td><%= product.description %></td>
-        <td><%= product.brand %></td>
-        <td><%= product.category %></td>
+        <td><%= product.brand.name %></td>
+        <td><%= product.category.name %></td>
         <td><%= link_to 'Show', admin_product_path(product) %></td>
         <td><%= link_to 'Edit', edit_admin_product_path(product) %></td>
         <td><%= link_to 'Destroy', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></td>
