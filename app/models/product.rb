@@ -16,6 +16,11 @@ class Product < ApplicationRecord
 
   validates :brand, :quantity, presence:true
 
+  #to run an instance method on a class
+  def self.search_by_name_or_description(search_term)
+    where("name LIKE ? OR description LIKE ?", "%#{search_term}%","%#{search_term}%")
+
+  end
 
 end
 
