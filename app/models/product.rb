@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
   belongs_to :brand, optional:true
   belongs_to :category
+  has_many :line_items
+  before_destroy :did_anyone_buy_this_product
 
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :brand_id
@@ -21,6 +23,19 @@ class Product < ApplicationRecord
     where("name LIKE ? OR description LIKE ?", "%#{search_term}%","%#{search_term}%")
 
   end
+
+  private
+#make sure no one bought this product before we toss it
+#if you toss a product that someone hought, their order history will be incorrect and incomplete
+  def did_anyone_buy_this_product
+    if line_items.empty?
+      return true
+    else
+      errors.add(:base, 'Line Items Present')
+      return false
+    end
+  end
+
 
 end
 
