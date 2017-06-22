@@ -1,3 +1,16 @@
 // Place all the styles related to the Storefront controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.jumbotron{
+  background-image: url("http://www.browngirlmagazine.com/wp-content/uploads/2015/02/aziz-ansari.png");
+  background-repeat: no-repeat;
+  /*vv takes the picture and covers however wide the screen is vv */
+  background-size: cover;
+  background-position: center;
+  /*centers the dead middle of the picture (top an bottom)*/
+  margin-top: -70px;
+  /*measurement based on how much space the navbar will eventually take*/
+  margin-bottom: 0;
+/*the actual "thing" according to the computer is the text in the jumbotron, so to show more of the image itself, we need to add padding around the text*/
+  padding: 20%;
+}
