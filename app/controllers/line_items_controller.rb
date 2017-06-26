@@ -11,7 +11,7 @@ class LineItemsController < ApplicationController
       redirect_to shop_path
     else
       flash.now[:alert] = "Unable to add item to your cart."
-      redirect_to :back
+      redirect_back(fallback_location: shop_path)
       #like hitting the back button
     end
   end
