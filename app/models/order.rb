@@ -2,6 +2,12 @@ class Order < ApplicationRecord
   has_many :line_items, dependent: :destroy
   #sets up a direct relationship between the order and the line item - one has to exist with the other. If you destroy the order, it will destroy the line items
   belongs_to :user
+
+  validates :name, :address, :user_id, presence: true
+
+  PAYMENT_TYPES = ["Paypal","Credit Card","Bitcoin",]
+
+  validates :pay_type, presence:true, inclusion: PAYMENT_TYPES
 end
 
 # == Schema Information

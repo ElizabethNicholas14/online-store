@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get '/shop'=>'storefront#index'
 
-  get 'about' => 'storefront#about'
+  get '/about' => 'storefront#about'
 
   devise_for :users
   namespace :admin do
@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   end
 
   resource :cart, only: [:edit, :update, :destroy]
-  resources :line_items, only: [:create]
+  resources :line_items, only: [:create, :destroy]
+  resources :orders, only: [:new, :create, :show]
   root 'storefront#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
